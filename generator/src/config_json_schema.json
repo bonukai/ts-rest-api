@@ -1,0 +1,2815 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ConfigType": {
+      "type": "object",
+      "properties": {
+        "openapi": {
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "info": {
+                  "$ref": "#/definitions/InfoObject"
+                },
+                "servers": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "$ref": "#/definitions/ServerObject"
+                  }
+                },
+                "security": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "$ref": "#/definitions/SecurityRequirementObject"
+                  }
+                },
+                "tags": {
+                  "type": [
+                    "array",
+                    "null"
+                  ],
+                  "items": {
+                    "$ref": "#/definitions/TagObject"
+                  }
+                },
+                "externalDocs": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/definitions/ExternalDocumentationObject"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "info"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "components": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "properties": {
+                    "responses": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/ResponseObject"
+                          }
+                        ]
+                      }
+                    },
+                    "parameters": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/ParameterObject"
+                          }
+                        ]
+                      }
+                    },
+                    "examples": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/ExampleObject"
+                          }
+                        ]
+                      }
+                    },
+                    "requestBodies": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/RequestBodyObject"
+                          }
+                        ]
+                      }
+                    },
+                    "headers": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/HeaderObject"
+                          }
+                        ]
+                      }
+                    },
+                    "securitySchemes": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/HttpSecurityScheme"
+                          },
+                          {
+                            "$ref": "#/definitions/ApiKeySecurityScheme"
+                          },
+                          {
+                            "$ref": "#/definitions/OAuth2SecurityScheme"
+                          },
+                          {
+                            "$ref": "#/definitions/OpenIdSecurityScheme"
+                          }
+                        ]
+                      }
+                    },
+                    "links": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/LinkObject"
+                          }
+                        ]
+                      }
+                    },
+                    "callbacks": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": {
+                        "oneOf": [
+                          {
+                            "$ref": "#/definitions/ReferenceObject"
+                          },
+                          {
+                            "$ref": "#/definitions/CallbackObject"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "tsConfigPath": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "schemaOutputDir": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "schemaOutputFileName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routesOutputDir": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "routesOutputFileName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "generateOpenApiSchema": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "openapi"
+      ]
+    },
+    "InfoObject": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "termsOfService": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contact": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ContactObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "license": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LicenseObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "version"
+      ]
+    },
+    "ContactObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "LicenseObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ServerObject": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variables": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/ServerVariableObject"
+          }
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ServerVariableObject": {
+      "type": "object",
+      "properties": {
+        "enum": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "default": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "default"
+      ]
+    },
+    "SecurityRequirementObject": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "TagObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "externalDocs": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExternalDocumentationObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ExternalDocumentationObject": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "ReferenceObject": {
+      "type": "object",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ref"
+      ]
+    },
+    "ResponseObject": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "headers": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/HeaderObject"
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaTypeObject"
+          }
+        },
+        "links": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/LinkObject"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "HeaderObject": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "deprecated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allowEmptyValue": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "style": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explode": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allowReserved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "example": {},
+        "examples": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/ExampleObject"
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaTypeObject"
+          }
+        }
+      },
+      "required": [
+        "example"
+      ]
+    },
+    "ArraySchemaObject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "array"
+          ]
+        },
+        "items": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            }
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": {},
+        "multipleOf": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "exclusiveMaximum": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "minimum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "exclusiveMinimum": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "maxLength": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minLength": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "pattern": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "enum": [
+                false,
+                true
+              ],
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxItems": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minItems": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uniqueItems": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "maxProperties": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minProperties": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "required": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "enum": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "properties": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "allOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "oneOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "anyOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "not": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nullable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "discriminator": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DiscriminatorObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "readOnly": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "writeOnly": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "xml": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/XMLObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "externalDocs": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExternalDocumentationObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "example": {},
+        "deprecated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "default",
+        "example",
+        "items",
+        "type"
+      ]
+    },
+    "NonArraySchemaObject": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/NonArraySchemaObjectType"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "format": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "default": {},
+        "multipleOf": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "exclusiveMaximum": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "minimum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "exclusiveMinimum": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "maxLength": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minLength": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "pattern": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "enum": [
+                false,
+                true
+              ],
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maxItems": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minItems": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "uniqueItems": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "maxProperties": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minProperties": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "required": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "enum": {
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "properties": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "allOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "oneOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "anyOf": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/NonArraySchemaObject"
+              },
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              }
+            ]
+          }
+        },
+        "not": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "nullable": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "discriminator": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/DiscriminatorObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "readOnly": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "writeOnly": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "xml": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/XMLObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "externalDocs": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ExternalDocumentationObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "example": {},
+        "deprecated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "default",
+        "example"
+      ]
+    },
+    "NonArraySchemaObjectType": {
+      "enum": [
+        "boolean",
+        "integer",
+        "number",
+        "object",
+        "string"
+      ],
+      "type": "string"
+    },
+    "DiscriminatorObject": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "type": "string"
+        },
+        "mapping": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "propertyName"
+      ]
+    },
+    "XMLObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "namespace": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prefix": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attribute": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "wrapped": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "ExampleObject": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {},
+        "externalValue": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MediaTypeObject": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "example": {},
+        "examples": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/ExampleObject"
+              }
+            ]
+          }
+        },
+        "encoding": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/EncodingObject"
+          }
+        }
+      },
+      "required": [
+        "example"
+      ]
+    },
+    "EncodingObject": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "headers": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/HeaderObject"
+              }
+            ]
+          }
+        },
+        "style": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explode": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allowReserved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "LinkObject": {
+      "type": "object",
+      "properties": {
+        "operationRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "operationId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parameters": {
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "requestBody": {},
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "server": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ServerObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "requestBody"
+      ]
+    },
+    "ParameterObject": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string"
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "deprecated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allowEmptyValue": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "style": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "explode": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allowReserved": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "#/definitions/ArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/NonArraySchemaObject"
+            },
+            {
+              "$ref": "#/definitions/ReferenceObject"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "example": {},
+        "examples": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/ReferenceObject"
+              },
+              {
+                "$ref": "#/definitions/ExampleObject"
+              }
+            ]
+          }
+        },
+        "content": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaTypeObject"
+          }
+        }
+      },
+      "required": [
+        "example",
+        "in",
+        "name"
+      ]
+    },
+    "RequestBodyObject": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/MediaTypeObject"
+          }
+        },
+        "required": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "content"
+      ]
+    },
+    "HttpSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "http"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "bearerFormat": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "scheme",
+        "type"
+      ]
+    },
+    "ApiKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "in": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "in",
+        "name",
+        "type"
+      ]
+    },
+    "OAuth2SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "object",
+          "properties": {
+            "implicit": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "authorizationUrl": {
+                  "type": "string"
+                },
+                "refreshUrl": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "scopes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "authorizationUrl",
+                "scopes"
+              ]
+            },
+            "password": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "tokenUrl": {
+                  "type": "string"
+                },
+                "refreshUrl": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "scopes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "scopes",
+                "tokenUrl"
+              ]
+            },
+            "clientCredentials": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "tokenUrl": {
+                  "type": "string"
+                },
+                "refreshUrl": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "scopes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "scopes",
+                "tokenUrl"
+              ]
+            },
+            "authorizationCode": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "authorizationUrl": {
+                  "type": "string"
+                },
+                "tokenUrl": {
+                  "type": "string"
+                },
+                "refreshUrl": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "scopes": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "authorizationUrl",
+                "scopes",
+                "tokenUrl"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "flows",
+        "type"
+      ]
+    },
+    "OpenIdSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "openIdConnect"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "openIdConnectUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "openIdConnectUrl",
+        "type"
+      ]
+    },
+    "CallbackObject": {
+      "type": "object",
+      "additionalProperties": {
+        "allOf": [
+          {
+            "type": "object",
+            "properties": {
+              "$ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "summary": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "servers": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "$ref": "#/definitions/ServerObject"
+                }
+              },
+              "parameters": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/definitions/ReferenceObject"
+                    },
+                    {
+                      "$ref": "#/definitions/ParameterObject"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "type": "object",
+            "properties": {
+              "get": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "put": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "post": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "delete": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "options": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "head": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "patch": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              },
+              "trace": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "tags": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "summary": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "description": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "externalDocs": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ExternalDocumentationObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "operationId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "parameters": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/ParameterObject"
+                        }
+                      ]
+                    }
+                  },
+                  "requestBody": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/ReferenceObject"
+                      },
+                      {
+                        "$ref": "#/definitions/RequestBodyObject"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "responses": {
+                    "$ref": "#/definitions/ResponsesObject"
+                  },
+                  "callbacks": {
+                    "type": [
+                      "object",
+                      "null"
+                    ],
+                    "additionalProperties": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/definitions/ReferenceObject"
+                        },
+                        {
+                          "$ref": "#/definitions/CallbackObject"
+                        }
+                      ]
+                    }
+                  },
+                  "deprecated": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "security": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/SecurityRequirementObject"
+                    }
+                  },
+                  "servers": {
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "$ref": "#/definitions/ServerObject"
+                    }
+                  }
+                },
+                "required": [
+                  "responses"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "ResponsesObject": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/ReferenceObject"
+          },
+          {
+            "$ref": "#/definitions/ResponseObject"
+          }
+        ]
+      }
+    }
+  },
+  "$ref": "#/definitions/ConfigType"
+}

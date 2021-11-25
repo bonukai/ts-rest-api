@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "outDir": "build",
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "disableSizeLimit": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["jest", "node"]
+  },
+  "include": ["src", "__tests__"]
+}
