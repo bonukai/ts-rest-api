@@ -1,15 +1,14 @@
 {
   "name": "typescript-routes-to-openapi-example",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "build/src/index.js",
   "scripts": {
     "prebuild": "typescript-routes-to-openapi generate",
     "build": "tsc"
   },
   "dependencies": {
-    "ajv": "^8.8.2",
     "express": "^4.17.1",
-    "typescript-routes-to-openapi": "file:../.."
+    "typescript-routes-to-openapi": "^0.0.4"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1"

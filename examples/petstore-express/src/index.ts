@@ -1,5 +1,5 @@
 import express from 'express';
-import { generatedRoutes } from './generated/routes';
+import { generatedRoutes } from '../generated/routes';
 
 const app = express();
 const PORT = 8888;
