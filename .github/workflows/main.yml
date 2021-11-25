@@ -12,4 +12,5 @@ jobs:
         with:
           node-version: 14 
       - run: npm install --prefix generator
+      - run: npm run build --prefix generator
       - run: npm run test --prefix generator
