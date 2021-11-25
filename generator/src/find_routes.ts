@@ -69,25 +69,27 @@ const validatePathParamProperty = (
     propertySchema.oneOf.forEach((subSchema) =>
       validatePathParamProperty(propertyName, subSchema, parser, canBeArray)
     );
+  } else if (propertySchema.allOf) {
+    propertySchema.allOf.forEach((subSchema) =>
+      validatePathParamProperty(propertyName, subSchema, parser, canBeArray)
+    );
   } else if (
     propertySchema.type &&
     ['string', 'boolean', 'number'].includes(propertySchema.type)
   ) {
-    return;
   } else if (propertySchema.enum) {
-    return;
   } else if (canBeArray && propertySchema.type === 'array') {
-    return validatePathParamProperty(
+    validatePathParamProperty(
       propertyName,
       propertySchema.items,
       parser,
       false
     );
+  } else {
+    throw new Error(
+      `Invalid path params property type for ${propertyName}, at: ${parser.filePathAndLineNumberOfParentNode()}`
+    );
   }
-
-  throw new Error(
-    `Invalid path params property type for ${propertyName}, at: ${parser.filePathAndLineNumberOfParentNode()}`
-  );
 };
 
 export const validateRequestQuery = (parser: TsToOpenApiTypeParser) => {
