@@ -326,7 +326,7 @@ export const getRoutesFromTsFile = (sourceFile: SourceFile): Route[] => {
       if (
         isImportedFromModule(
           callExpression,
-          '@typed-rest-api/server',
+          '@ts-rest-api/server',
           'createExpressRoute'
         )
       ) {
@@ -334,7 +334,7 @@ export const getRoutesFromTsFile = (sourceFile: SourceFile): Route[] => {
       } else if (
         isImportedFromModule(
           callExpression,
-          '@typed-rest-api/server',
+          '@ts-rest-api/server',
           'registerRoute'
         )
       ) {

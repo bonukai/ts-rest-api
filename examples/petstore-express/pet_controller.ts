@@ -1,4 +1,4 @@
-import { createExpressRoute } from '@typed-rest-api/server';
+import { createExpressRoute } from '@ts-rest-api/server';
 
 type NewPet = {
   name: string;

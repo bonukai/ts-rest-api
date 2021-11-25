@@ -34,7 +34,7 @@ const handleErrors = (f: () => void) => {
 const onGenerate = (config?: string) => {
   handleErrors(() => {
     const configPath =
-      config || path.join(process.cwd(), 'typed-rest-api.json');
+      config || path.join(process.cwd(), 'ts-rest-api.json');
 
     typedRestApi(loadConfigFile(configPath));
   });

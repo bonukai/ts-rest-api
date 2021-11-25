@@ -1,4 +1,4 @@
-import { createExpressRoute, registerRoute } from '@typed-rest-api/server';
+import { createExpressRoute, registerRoute } from '@ts-rest-api/server';
 import _ from 'lodash';
 import { Project } from 'ts-morph';
 import { generateOpenApiDocument } from '../src/generators/openapi';

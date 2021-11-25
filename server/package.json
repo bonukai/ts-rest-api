@@ -1,5 +1,5 @@
 {
-  "name": "@typed-rest-api/server",
+  "name": "@ts-rest-api/server",
   "version": "0.0.1",
   "description": "",
   "main": "./build/index.js",

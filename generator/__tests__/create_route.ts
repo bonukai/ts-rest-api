@@ -1,4 +1,4 @@
-import { createExpressRoute } from '@typed-rest-api/server';
+import { createExpressRoute } from '@ts-rest-api/server';
 import { Project, SyntaxKind } from 'ts-morph';
 import { getSchemaFromCreateRoute } from '../src/find_routes';
 import { InvalidParamsType, RouteValidationError } from '../src/index';
