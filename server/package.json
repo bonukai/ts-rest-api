@@ -10,6 +10,9 @@
     "name": "bonukai",
     "url": "https://github.com/bonukai"
   },
+  "scripts": {
+    "build": "tsc"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13"
