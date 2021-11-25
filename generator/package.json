@@ -1,6 +1,6 @@
 {
   "name": "@ts-rest-api/generator",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Generate OpenApi document and input validators with Ajv for express server from TypeScript project",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
