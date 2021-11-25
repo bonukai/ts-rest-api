@@ -8,6 +8,9 @@
     "ts-rest-api": "./build/cli.js"
   },
   "type": "commonjs",
+  "repository": {
+    "url": "https://github.com/bonukai/ts-rest-api"
+  },
   "scripts": {
     "test": "jest",
     "prebuild": "ts-node ./src/generate_config_json_schema.ts",
