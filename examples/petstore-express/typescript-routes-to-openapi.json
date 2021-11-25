@@ -20,6 +20,5 @@
                 "url": "http://petstore.swagger.io/api"
             }
         ]
-    },
-    "generateValidators": true
+    }
 }
