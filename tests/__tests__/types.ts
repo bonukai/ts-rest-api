@@ -1,5 +1,5 @@
 import { Project } from 'ts-morph';
-import { TsToOpenApiTypeParser } from '../src/type_parser';
+import { TsToOpenApiTypeParser } from 'typescript-routes-to-openapi/src/type_parser';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);

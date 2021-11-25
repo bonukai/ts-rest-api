@@ -1,4 +1,4 @@
-import { tsTypeToJsonSchema } from '../src/type_parser';
+import { tsTypeToJsonSchema } from 'typescript-routes-to-openapi/src/type_parser';
 
 describe('tsTypeToJsonSchema', () => {
   test('top ref', () => {

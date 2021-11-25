@@ -1,6 +1,6 @@
 import { OpenAPIV3 } from 'openapi-types';
 import { Project } from 'ts-morph';
-import { isReferenceObject, TsToOpenApiTypeParser } from '../src/type_parser';
+import { isReferenceObject, TsToOpenApiTypeParser } from 'typescript-routes-to-openapi/src/type_parser';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);

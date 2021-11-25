@@ -1,0 +1,14 @@
+{
+  "name": "tests",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typescript-routes-to-openapi": "file:.."
+  }
+}

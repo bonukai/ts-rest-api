@@ -1,7 +1,7 @@
-import { createExpressRoute } from '@typescript-routes-to-openapi/server';
 import { Project, SyntaxKind } from 'ts-morph';
-import { getSchemaFromCreateRoute } from '../src/find_routes';
-import { InvalidParamsType, RouteValidationError } from '../src/index';
+import { createExpressRoute } from 'typescript-routes-to-openapi';
+import { getSchemaFromCreateRoute } from 'typescript-routes-to-openapi/src/find_routes';
+import { InvalidParamsType, RouteValidationError } from 'typescript-routes-to-openapi/src/index';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);
@@ -28,12 +28,12 @@ const createTest = (args: {
   testDescription: string;
   className: string;
   methodName: string;
-  expectedError: new () => void;
+  expectedError: new (message?: string) => void;
 }) => {
   test(args.testDescription, () => {
     const method = getMethod(args.className, args.methodName);
 
-    expect(() => getSchemaFromCreateRoute(method)).toThrowError(
+    expect(() => getSchemaFromCreateRoute(method)).toThrow(
       args.expectedError
     );
   });
