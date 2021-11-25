@@ -1,6 +1,6 @@
 {
   "name": "typescript-routes-to-openapi",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Generate OpenApi document and input validators with Ajv for express server from TypeScript project",
   "private": false,
   "main": "./build/index.js",
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "ajv": "^8.8.2"    
+    "ajv": "^8.8.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
