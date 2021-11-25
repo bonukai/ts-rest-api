@@ -13,5 +13,5 @@
     "resolveJsonModule": true,
     "types": ["jest", "node"]
   },
-  "include": ["src", "__tests__"]
+  "include": ["src"]
 }
