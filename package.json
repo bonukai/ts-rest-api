@@ -18,9 +18,10 @@
     "build": "tsc"
   },
   "keywords": [
-    "swagger",
+    "express",
+    "generator",
     "openapi",
-    "generator"
+    "swagger"
   ],
   "author": {
     "name": "bonukai",
