@@ -7,8 +7,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@typescript-routes-to-openapi/server": "file:../../server",
     "@types/express": "^4.17.13",
+    "@typescript-routes-to-openapi/server": "^0.0.4",
     "ajv": "^8.8.2",
     "express": "^4.17.1"
   },
