@@ -6,6 +6,7 @@ Generate [OpenApi](https://swagger.io/specification/) document and input validat
 
 ```
 npm install typescript-routes-to-openapi
+npm install --save-dev path-to-regexp ts-morph
 ```
 
 ## Usage
