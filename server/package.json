@@ -1,6 +1,6 @@
 {
-  "name": "@ts-rest-api/server",
-  "version": "0.0.3",
+  "name": "@typescript-routes-to-openapi/server",
+  "version": "0.0.4",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -21,6 +21,6 @@
     "ajv": "^8.8.2"
   },
   "repository": {
-    "url": "https://github.com/bonukai/ts-rest-api"
+    "url": "https://github.com/bonukai/typescript-routes-to-openapi"
   }
 }

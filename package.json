@@ -1,5 +1,5 @@
 {
-  "name": "ts-rest-api",
+  "name": "typescript-routes-to-openapi",
   "version": "0.0.1",
   "description": "Generate OpenApi document and input validators with Ajv for express server from TypeScript project",
   "private": false,

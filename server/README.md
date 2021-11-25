@@ -1,1 +1,1 @@
-This is a sever part of ts-rest-api, see [here](https://github.com/bonukai/ts-rest-api#readme) for full description
+This is a sever part of typescript-routes-to-openapi, see [here](https://github.com/bonukai/typescript-routes-to-openapi#readme) for full description

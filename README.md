@@ -1,19 +1,19 @@
-# ts-rest-api
+# typescript-routes-to-openapi
 
 Generate [OpenApi](https://swagger.io/specification/) document and input validators with [Ajv](ajv.js.org/) for [express](https://expressjs.com/) server from [TypeScript](https://www.typescriptlang.org/) project.
 
 ## Installation
 
 ```
-npm install @ts-rest-api/server
-npm install --save-dev @ts-rest-api/generator
+npm install @typescript-routes-to-openapi/server
+npm install --save-dev @typescript-routes-to-openapi/generator
 ```
 
 ## Usage
 
 ### Create configuration file
 
-`ts-rest-api.json`
+`typescript-routes-to-openapi.json`
 
 ```json
 {
@@ -46,7 +46,7 @@ npm install --save-dev @ts-rest-api/generator
 ### Create controller
 
 ```TypeScript
-import { createExpressRoute } from '@ts-rest-api/server';
+import { createExpressRoute } from '@typescript-routes-to-openapi/server';
 
 type NewPet = {
   name: string;
@@ -141,7 +141,7 @@ export class PetController {
 ### Generate routes and OpenApi document
 
 ```
-npx ts-rest-api generate
+npx typescript-routes-to-openapi generate
 ```
 
 ### Include generated routes in your express application
