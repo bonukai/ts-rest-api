@@ -8,6 +8,9 @@
   "bin": {
     "typescript-routes-to-openapi": "./build/cli.js"
   },
+  "repository": {
+    "url": "https://github.com/bonukai/typescript-routes-to-openapi"
+  },
   "scripts": {
     "test": "npm run test --prefix tests",
     "prebuild": "ts-node ./src/generate_config_json_schema.ts",
