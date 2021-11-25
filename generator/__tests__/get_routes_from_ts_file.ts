@@ -129,6 +129,31 @@ describe('getRoutesFromTsFile', () => {
                   type: 'number',
                 },
               },
+              {
+                in: 'query',
+                name: 'foo',
+                required: true,
+                schema: { type: 'string' },
+              },
+              {
+                in: 'query',
+                name: 'bar',
+                required: false,
+                schema: {
+                  type: 'string',
+                  nullable: true,
+                  enum: ['foo', 'bar', null].sort(),
+                },
+              },
+              {
+                in: 'query',
+                name: 'array',
+                required: true,
+                schema: {
+                  type: 'array',
+                  items: { type: 'string' },
+                },
+              },
             ],
             responses: {
               '200': {
@@ -190,6 +215,11 @@ registerRoute<{
      * @description id
      */
     id: number;
+  };
+  requestQuery: {
+    foo: string;
+    bar?: 'foo' | 'bar';
+    array: string[];
   };
   /**
    * @openapi_contentType application/json
