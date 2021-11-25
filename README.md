@@ -38,8 +38,7 @@ npm install --save-dev path-to-regexp ts-morph
         "url": "http://petstore.swagger.io/api"
       }
     ]
-  },
-  "generateValidators": true
+  }
 }
 ```
 
