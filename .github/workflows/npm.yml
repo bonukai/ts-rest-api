@@ -15,5 +15,11 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm publish
+      - run: npm install --prefix server
+      - run: npm run build --prefix server
+      - run: npm publish --prefix server
+      - run: npm install --prefix generator
+      - run: npm run build --prefix generator
+      - run: npm publish --prefix generator
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
