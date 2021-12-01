@@ -63,6 +63,18 @@ const defaultConfig: Omit<ConfigType, 'openapi'> = {
   routesOutputFileName: 'routes.ts',
 };
 
+export const validateConfig = (config: ConfigType) => {
+  const ajv = new Ajv();
+
+  if (!ajv.validate(configJsonSchema, config)) {
+    throw new Error(
+      `Invalid config file: ${ajv.errorsText(ajv.errors, {
+        dataVar: 'Config',
+      })}`
+    );
+  }
+};
+
 export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
   if (!config) {
     config = loadConfigFile(defaultConfigPath());
@@ -73,15 +85,7 @@ export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
     ...config,
   };
 
-  const ajv = new Ajv();
-
-  if (!ajv.validate(configJsonSchema, config)) {
-    throw new Error(
-      `Invalid config file: ${ajv.errorsText(ajv.errors, {
-        dataVar: 'Config',
-      })}`
-    );
-  }
+  validateConfig(config);
 
   overridePreviouslyGeneratedRoutesFile(config);
 
@@ -142,9 +146,7 @@ const _generateOpenApiDocument = (config: ConfigType, routes: Route[]) => {
 };
 
 const _generateRoutes = (config: ConfigType, routes: Route[]) => {
-  const routesOutputDir = path.join(
-    config.routesOutputDir || path.join(process.cwd(), 'generated')
-  );
+  const routesOutputDir = config.routesOutputDir!;
 
   const routesOutputPath = path.join(
     routesOutputDir,
