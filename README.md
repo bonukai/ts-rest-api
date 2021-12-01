@@ -38,7 +38,14 @@ npm install --save-dev path-to-regexp ts-morph
         "url": "http://petstore.swagger.io/api"
       }
     ]
-  }
+  },
+  "tsConfigPath": "tsconfig.json",
+  "generateOpenApiSchema": true,
+  "checkProgramForErrors": true,
+  "schemaOutputDir": "./",
+  "schemaOutputFileName": "openapi.json",
+  "routesOutputDir": "generated",
+  "routesOutputFileName": "routes.ts"
 }
 ```
 
@@ -160,6 +167,5 @@ app.listen(PORT, () => {
 });
 
 ```
-
 
 See [example](examples/petstore-express)
