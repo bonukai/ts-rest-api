@@ -241,6 +241,12 @@
             "boolean",
             "null"
           ]
+        },
+        "checkProgramForErrors": {
+          "type": [
+            "boolean",
+            "null"
+          ]
         }
       },
       "required": [
