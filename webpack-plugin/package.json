@@ -1,0 +1,32 @@
+{
+  "name": "typescript-routes-to-openapi-webpack",
+  "version": "0.0.1",
+  "description": "Webpack plugin for typescript-routes-to-openapi",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "repository": {
+    "url": "https://github.com/bonukai/typescript-routes-to-openapi"
+  },
+  "keywords": [
+    "express",
+    "generator",
+    "openapi",
+    "swagger"
+  ],
+  "author": {
+    "name": "bonukai",
+    "url": "https://github.com/bonukai"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.5.2",
+    "typescript-routes-to-openapi": "file:..",
+    "webpack": "^5.64.4"
+  },
+  "files": [
+    "build"
+  ]
+}
