@@ -2,12 +2,18 @@ import _ from 'lodash';
 import { OpenAPIV3 } from 'openapi-types';
 import path from 'path';
 import Ajv from 'ajv';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from 'fs';
 
 import { Route } from './route';
 import { generateOpenApiDocument } from './generators/openapi';
 import { generateRoutes } from './generators/routes';
-import { getRoutes } from './find_routes';
+import { checkProgramForErrors, getRoutes } from './find_routes';
 import configJsonSchema from './config_json_schema.json';
 import { createExpressRoute, registerRoute, ValidationError } from './server';
 export { createExpressRoute, registerRoute, ValidationError };
@@ -44,9 +50,29 @@ export type ConfigType = {
   routesOutputDir?: string;
   routesOutputFileName?: string;
   generateOpenApiSchema?: boolean;
+  checkProgramForErrors?: boolean;
 };
 
-export const typescriptRoutesToOpenApi = (config: ConfigType) => {
+const defaultConfig: Omit<ConfigType, 'openapi'> = {
+  tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),
+  generateOpenApiSchema: true,
+  checkProgramForErrors: true,
+  schemaOutputDir: process.cwd(),
+  schemaOutputFileName: 'openapi.json',
+  routesOutputDir: path.join(process.cwd(), 'generated'),
+  routesOutputFileName: 'routes.ts',
+};
+
+export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
+  if (!config) {
+    config = loadConfigFile(defaultConfigPath());
+  }
+
+  config = {
+    ...defaultConfig,
+    ...config,
+  };
+
   const ajv = new Ajv();
 
   if (!ajv.validate(configJsonSchema, config)) {
@@ -59,10 +85,13 @@ export const typescriptRoutesToOpenApi = (config: ConfigType) => {
 
   overridePreviouslyGeneratedRoutesFile(config);
 
-  const tsConfigPath =
-    config.tsConfigPath || path.join(process.cwd(), 'tsconfig.json');
+  const tsConfigFileFilePath = config.tsConfigPath!;
 
-  const routes = getRoutes(tsConfigPath);
+  if (config.checkProgramForErrors) {
+    checkProgramForErrors(tsConfigFileFilePath);
+  }
+
+  const routes = getRoutes(tsConfigFileFilePath);
 
   if (config.generateOpenApiSchema ?? true) {
     _generateOpenApiDocument(config, routes);
@@ -71,10 +100,29 @@ export const typescriptRoutesToOpenApi = (config: ConfigType) => {
   _generateRoutes(config, routes);
 };
 
+export const defaultConfigPath = () => {
+  return path.join(process.cwd(), 'typescript-routes-to-openapi.json');
+};
+
+export const loadConfigFile = (configPath: string): ConfigType => {
+  if (!existsSync(configPath)) {
+    throw new Error(`Config file does not exist: ${configPath}`);
+  }
+
+  if (!statSync(configPath).isFile()) {
+    throw new Error(`Config needs to be a regular file: ${configPath}`);
+  }
+
+  const fileContent = readFileSync(path.resolve(configPath)).toString();
+  const config = JSON.parse(fileContent);
+
+  return config;
+};
+
 const _generateOpenApiDocument = (config: ConfigType, routes: Route[]) => {
   const schemaOutputPath = path.join(
-    config.schemaOutputDir || process.cwd(),
-    config.schemaOutputFileName || 'openapi.json'
+    config.schemaOutputDir!,
+    config.schemaOutputFileName!
   );
 
   const generatedOpenApiSchema = generateOpenApiDocument(
@@ -100,7 +148,7 @@ const _generateRoutes = (config: ConfigType, routes: Route[]) => {
 
   const routesOutputPath = path.join(
     routesOutputDir,
-    config.routesOutputFileName || 'routes.ts'
+    config.routesOutputFileName!
   );
 
   const generatedRoutesFile = generateRoutes(routes, routesOutputDir);
@@ -118,8 +166,8 @@ const _generateRoutes = (config: ConfigType, routes: Route[]) => {
 
 const overridePreviouslyGeneratedRoutesFile = (config: ConfigType) => {
   const routesOutputPath = path.join(
-    config.routesOutputDir || path.join(process.cwd(), 'generated'),
-    config.routesOutputFileName || 'routes.ts'
+    config.routesOutputDir!,
+    config.routesOutputFileName!
   );
 
   if (existsSync(routesOutputPath)) {

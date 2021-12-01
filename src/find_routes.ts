@@ -161,7 +161,7 @@ const splitTagsString = (tags?: string): string[] | undefined => {
   return tags?.split(',').map((tag) => tag.trim());
 };
 
-const checkProgramForErrors = (tsConfigFilePath: string) => {
+export const checkProgramForErrors = (tsConfigFilePath: string) => {
   const project = new Project({
     tsConfigFilePath: tsConfigFilePath,
   });
@@ -347,8 +347,6 @@ export const getRoutesFromTsFile = (sourceFile: SourceFile): Route[] => {
 };
 
 export const getRoutes = (tsConfigFilePath: string): Route[] => {
-  checkProgramForErrors(tsConfigFilePath);
-
   const project = new Project({
     tsConfigFilePath: tsConfigFilePath,
     compilerOptions: {

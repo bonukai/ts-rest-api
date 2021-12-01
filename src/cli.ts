@@ -2,25 +2,13 @@
 
 import { Command } from 'commander';
 import { exit } from 'process';
-import { existsSync, readFileSync, statSync } from 'fs';
-import path from 'path';
-import { ConfigType, typescriptRoutesToOpenApi } from '.';
+
+import {
+  defaultConfigPath,
+  loadConfigFile,
+  typescriptRoutesToOpenApi,
+} from '.';
 import { tsTypeToJsonSchema, TsTypeToJsonSchemaArgs } from './type_parser';
-
-const loadConfigFile = (configPath: string): ConfigType => {
-  if (!existsSync(configPath)) {
-    throw new Error(`Config file does not exist: ${configPath}`);
-  }
-
-  if (!statSync(configPath).isFile()) {
-    throw new Error(`Config needs to be a regular file: ${configPath}`);
-  }
-
-  const fileContent = readFileSync(path.resolve(configPath)).toString();
-  const config = JSON.parse(fileContent);
-
-  return config;
-};
 
 const handleErrors = (f: () => void) => {
   try {
@@ -33,8 +21,7 @@ const handleErrors = (f: () => void) => {
 
 const onGenerate = (config?: string) => {
   handleErrors(() => {
-    const configPath =
-      config || path.join(process.cwd(), 'typescript-routes-to-openapi.json');
+    const configPath = config || defaultConfigPath();
 
     typescriptRoutesToOpenApi(loadConfigFile(configPath));
   });
