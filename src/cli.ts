@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { exit } from 'process';
 import { existsSync, readFileSync, statSync } from 'fs';
 import path from 'path';
-import { ConfigType, typedRestApi } from '.';
+import { ConfigType, typescriptRoutesToOpenApi } from '.';
 import { tsTypeToJsonSchema, TsTypeToJsonSchemaArgs } from './type_parser';
 
 const loadConfigFile = (configPath: string): ConfigType => {
@@ -36,7 +36,7 @@ const onGenerate = (config?: string) => {
     const configPath =
       config || path.join(process.cwd(), 'typescript-routes-to-openapi.json');
 
-    typedRestApi(loadConfigFile(configPath));
+    typescriptRoutesToOpenApi(loadConfigFile(configPath));
   });
 };
 

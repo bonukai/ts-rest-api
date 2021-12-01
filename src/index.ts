@@ -46,7 +46,7 @@ export type ConfigType = {
   generateOpenApiSchema?: boolean;
 };
 
-export const typedRestApi = (config: ConfigType) => {
+export const typescriptRoutesToOpenApi = (config: ConfigType) => {
   const ajv = new Ajv();
 
   if (!ajv.validate(configJsonSchema, config)) {
