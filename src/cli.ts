@@ -30,7 +30,7 @@ const onGenerate = (config?: string) => {
 const onTsTypeToJsonSchema = (args: TsTypeToJsonSchemaArgs) => {
   handleErrors(() => {
     const jsonSchema = tsTypeToJsonSchema(args);
-    console.log(JSON.stringify(jsonSchema, null, 2));
+    console.log(jsonSchema);
   });
 };
 
