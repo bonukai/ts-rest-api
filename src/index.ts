@@ -10,7 +10,6 @@ import {
   writeFileSync,
 } from 'fs';
 
-import { Route } from './route';
 import { generateOpenApiDocument } from './generators/openapi';
 import { generateRoutes } from './generators/routes';
 import { checkProgramForErrors, getRoutes } from './find_routes';
@@ -63,7 +62,7 @@ const defaultConfig: Omit<ConfigType, 'openapi'> = {
   routesOutputFileName: 'routes.ts',
 };
 
-export const validateConfig = (config: ConfigType) => {
+const validateConfig = (config: ConfigType) => {
   const ajv = new Ajv();
 
   if (!ajv.validate(configJsonSchema, config)) {
@@ -75,7 +74,7 @@ export const validateConfig = (config: ConfigType) => {
   }
 };
 
-export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
+const loadAndValidateConfig = (config?: ConfigType) => {
   if (!config) {
     config = loadConfigFile(defaultConfigPath());
   }
@@ -87,8 +86,10 @@ export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
 
   validateConfig(config);
 
-  overridePreviouslyGeneratedRoutesFile(config);
+  return config;
+};
 
+const getRoutesAndOpenApiDocument = (config: ConfigType) => {
   const tsConfigFileFilePath = config.tsConfigPath!;
 
   if (config.checkProgramForErrors) {
@@ -97,11 +98,47 @@ export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
 
   const routes = getRoutes(tsConfigFileFilePath);
 
-  if (config.generateOpenApiSchema ?? true) {
-    _generateOpenApiDocument(config, routes);
+  let generatedOpenApiDocument: string | undefined = undefined;
+
+  if (config.generateOpenApiSchema === true) {
+    generatedOpenApiDocument = generateOpenApiDocument(routes, config.openapi);
   }
 
-  _generateRoutes(config, routes);
+  const generatedRoutesFile = generateRoutes(routes, config.routesOutputDir!);
+
+  return {
+    routesFile: generatedRoutesFile,
+    openApiDocument: generatedOpenApiDocument,
+  };
+};
+
+export const typescriptRoutesToOpenApi = (config?: ConfigType) => {
+  config = loadAndValidateConfig(config);
+
+  const tsConfigFileFilePath = config.tsConfigPath!;
+
+  if (config.checkProgramForErrors) {
+    overridePreviouslyGeneratedRoutesFile(config);
+    checkProgramForErrors(tsConfigFileFilePath);
+  }
+
+  const { openApiDocument, routesFile } = getRoutesAndOpenApiDocument(config);
+
+  if (config.generateOpenApiSchema === true) {
+    const openApiDocumentFilePath = getOpenApiDocumentFilePath(config);
+
+    createDirs(openApiDocumentFilePath);
+    if (writeFileIfDifferent(openApiDocumentFilePath, openApiDocument!)) {
+      console.log('Generated OpenApi schema to:', openApiDocumentFilePath);
+    }
+  }
+
+  const routesFilePath = getRoutesFilePath(config);
+
+  createDirs(routesFilePath);
+  if (writeFileIfDifferent(routesFilePath, routesFile)) {
+    console.log('Generated routes to:', routesFilePath);
+  }
 };
 
 export const defaultConfigPath = () => {
@@ -123,47 +160,31 @@ export const loadConfigFile = (configPath: string): ConfigType => {
   return config;
 };
 
-const _generateOpenApiDocument = (config: ConfigType, routes: Route[]) => {
-  const schemaOutputPath = path.join(
-    config.schemaOutputDir!,
-    config.schemaOutputFileName!
-  );
-
-  const generatedOpenApiSchema = generateOpenApiDocument(
-    routes,
-    config.openapi
-  );
-
-  if (!existsSync(path.dirname(schemaOutputPath))) {
-    mkdirSync(path.dirname(schemaOutputPath), {
-      recursive: true,
-    });
-  }
-
-  writeFileSync(schemaOutputPath, generatedOpenApiSchema);
-
-  console.log('Generated OpenApi schema to:', schemaOutputPath);
+const getOpenApiDocumentFilePath = (config: ConfigType) => {
+  return path.join(config.schemaOutputDir!, config.schemaOutputFileName!);
 };
 
-const _generateRoutes = (config: ConfigType, routes: Route[]) => {
-  const routesOutputDir = config.routesOutputDir!;
+const getRoutesFilePath = (config: ConfigType) => {
+  return path.join(config.routesOutputDir!, config.routesOutputFileName!);
+};
 
-  const routesOutputPath = path.join(
-    routesOutputDir,
-    config.routesOutputFileName!
-  );
-
-  const generatedRoutesFile = generateRoutes(routes, routesOutputDir);
-
-  if (!existsSync(routesOutputDir)) {
-    mkdirSync(routesOutputDir, {
+const createDirs = (filePath: string) => {
+  if (!existsSync(path.dirname(filePath))) {
+    mkdirSync(path.dirname(filePath), {
       recursive: true,
     });
   }
+};
 
-  writeFileSync(routesOutputPath, generatedRoutesFile);
+const writeFileIfDifferent = (file: string, data: string) => {
+  const fileContent = readFileSync(file);
 
-  console.log('Generated routes to:', routesOutputPath);
+  if (data !== fileContent.toString('utf-8')) {
+    writeFileSync(file, data);
+    return true;
+  }
+
+  return false;
 };
 
 const overridePreviouslyGeneratedRoutesFile = (config: ConfigType) => {
