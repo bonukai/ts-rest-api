@@ -122,4 +122,17 @@ describe('openApiToJsonSchema', () => {
       },
     });
   });
+
+  test('enum', () => {
+    expect(
+      openApiToJsonSchema({
+        enum: ['a', 'b', 'c', null],
+        type: 'string',
+        nullable: true,
+      })
+    ).toStrictEqual({
+      enum: ['a', 'b', 'c', null],
+      type: 'string',
+    });
+  });
 });
