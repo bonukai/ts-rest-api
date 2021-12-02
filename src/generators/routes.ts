@@ -12,7 +12,9 @@ import { getPathParams, visitOpenApiSchema } from '../utils';
  * @param enumTypes
  * @returns
  */
-const splitMultiTypeEnum = (enumTypes: (string | boolean | number)[]) => {
+const _splitMultiTypeEnum = (
+  enumTypes: (string | boolean | number | null)[]
+) => {
   const grouped = _(enumTypes).groupBy((t) => typeof t);
 
   if (grouped.size() === 1) {
@@ -21,6 +23,12 @@ const splitMultiTypeEnum = (enumTypes: (string | boolean | number)[]) => {
 
   return grouped
     .mapValues((value, key) => {
+      if (value.at(0) === null) {
+        return {
+          type: 'null',
+        };
+      }
+
       return {
         enum: value,
         type: key,
@@ -30,18 +38,27 @@ const splitMultiTypeEnum = (enumTypes: (string | boolean | number)[]) => {
     .value();
 };
 
-const splitMultiTypeEnumRecursive = (
+export const splitMultiTypeEnum = (
   schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject
 ) => {
   const res = { ...schema };
 
   visitOpenApiSchema(res, (child) => {
-    if ('enum' in child && child.enum && child.enum.length > 0) {
-      const splitted = splitMultiTypeEnum(child.enum);
+    if (
+      'enum' in child &&
+      child.enum &&
+      child.enum.length > 0 &&
+      !('type' in child)
+    ) {
+      const splitted = _splitMultiTypeEnum(child.enum);
 
       if (splitted) {
         delete child.enum;
         child.oneOf = splitted as any;
+
+        if (child.nullable) {
+          delete child.nullable;
+        }
       }
     }
   });
@@ -125,16 +142,12 @@ export const generateRoutesCalls = (routes: Route[]) => {
             : undefined,
           route.requestQuery
             ? `requestQuerySchema: ${JSON.stringify(
-                splitMultiTypeEnumRecursive(
-                  route.requestQuery.jsonSchema() as any
-                )
+                splitMultiTypeEnum(route.requestQuery.jsonSchema() as any)
               )}`
             : undefined,
           route.requestBody
             ? `requestBodySchema: ${JSON.stringify(
-                splitMultiTypeEnumRecursive(
-                  route.requestBody.jsonSchema() as any
-                )
+                splitMultiTypeEnum(route.requestBody.jsonSchema() as any)
               )}`
             : undefined,
         ]
