@@ -942,6 +942,126 @@ describe('tsTypeToJsonSchema', () => {
       required: ['c'],
     });
   });
+
+  test('NamedEnums', () => {
+    const { jsonSchema, openApiSchema, openApiDefinitions } =
+      getSchemas('NamedEnums');
+
+    expect(jsonSchema).toStrictEqual({
+      $schema: 'http://json-schema.org/draft-07/schema#',
+      definitions: {
+        NamedEnum: {
+          enum: ['a', 'b', 'c'],
+          type: 'string',
+        },
+        EnumFromArray: {
+          enum: ['a', 'b', 'c'],
+          type: 'string',
+        },
+        NamedStringType: {
+          type: 'string',
+        },
+      },
+      properties: {
+        namedEnum: {
+          $ref: '#/definitions/NamedEnum',
+        },
+        enumFromArray: {
+          $ref: '#/definitions/EnumFromArray',
+        },
+        nullableEnumFromArray: {
+          oneOf: [{ $ref: '#/definitions/EnumFromArray' }, { type: 'null' }],
+        },
+        nullableNamedEnum: {
+          oneOf: [{ $ref: '#/definitions/NamedEnum' }, { type: 'null' }],
+        },
+        namedStringType: {
+          $ref: '#/definitions/NamedStringType',
+        },
+        union: {
+          oneOf: [{ type: 'number' }, { $ref: '#/definitions/EnumFromArray' }],
+        },
+        nullableUnion: {
+          oneOf: [
+            { type: 'number' },
+            { $ref: '#/definitions/EnumFromArray' },
+            { type: 'null' },
+          ],
+        },
+      },
+      required: [
+        'namedEnum',
+        'enumFromArray',
+        'namedStringType',
+        'union',
+      ].sort(),
+      type: 'object',
+    });
+
+    expect(openApiSchema).toStrictEqual({
+      properties: {
+        namedEnum: {
+          $ref: '#/components/schemas/NamedEnum',
+        },
+        enumFromArray: {
+          $ref: '#/components/schemas/EnumFromArray',
+        },
+        nullableEnumFromArray: {
+          allOf: [
+            {
+              $ref: '#/components/schemas/EnumFromArray',
+            },
+          ],
+          nullable: true,
+        },
+        nullableNamedEnum: {
+          allOf: [
+            {
+              $ref: '#/components/schemas/NamedEnum',
+            },
+          ],
+          nullable: true,
+        },
+        namedStringType: {
+          $ref: '#/components/schemas/NamedStringType',
+        },
+        union: {
+          oneOf: [
+            { type: 'number' },
+            { $ref: '#/components/schemas/EnumFromArray' },
+          ],
+        },
+        nullableUnion: {
+          oneOf: [
+            { type: 'number' },
+            { $ref: '#/components/schemas/EnumFromArray' },
+          ],
+          nullable: true,
+        },
+      },
+      required: [
+        'namedEnum',
+        'enumFromArray',
+        'namedStringType',
+        'union',
+      ].sort(),
+      type: 'object',
+    });
+
+    expect(openApiDefinitions).toStrictEqual({
+      NamedEnum: {
+        enum: ['a', 'b', 'c'],
+        type: 'string',
+      },
+      EnumFromArray: {
+        enum: ['a', 'b', 'c'],
+        type: 'string',
+      },
+      NamedStringType: {
+        type: 'string',
+      },
+    });
+  });
 });
 
 type A = {
@@ -1033,4 +1153,20 @@ type RecursiveType = {
 type ObjectWithNullableRefs = {
   a?: A;
   c: C;
+};
+
+type NamedEnum = 'a' | 'b' | 'c';
+const enumValues = ['a', 'b', 'c'] as const;
+type EnumFromArray = typeof enumValues[number];
+
+type NamedStringType = string;
+
+type NamedEnums = {
+  namedEnum: NamedEnum;
+  enumFromArray: EnumFromArray;
+  nullableEnumFromArray?: EnumFromArray;
+  nullableNamedEnum?: NamedEnum;
+  namedStringType: NamedStringType;
+  union: number | EnumFromArray;
+  nullableUnion?: number | EnumFromArray;
 };

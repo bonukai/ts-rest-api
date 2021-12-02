@@ -290,7 +290,7 @@ export class TsToOpenApiTypeParser {
     currentDefinition: string | undefined = undefined,
     isRoot: boolean | undefined = false
   ): boolean => {
-    const typeName = getTypeName(nodeType);
+    const typeName = getTypeName(nodeType, this.parentNode);
 
     if (
       (this.noTopRef === true && isRoot === false) ||
@@ -305,7 +305,7 @@ export class TsToOpenApiTypeParser {
   private tsRefTypeToJsonSchema(
     nodeType: Type<ts.Type>
   ): OpenAPIV3.ReferenceObject {
-    const typeName = getTypeName(nodeType)!;
+    const typeName = getTypeName(nodeType, this.parentNode)!;
 
     if (!this._definitions.has(typeName)) {
       this._definitions.set(typeName, null);
@@ -403,9 +403,21 @@ export class TsToOpenApiTypeParser {
   private tsUnionTypeToOpenApi(
     nodeType: Type<ts.Type>
   ): OpenAPIV3.SchemaObject {
-    const res = nodeType.getUnionTypes().map((unionType) => {
-      return this.tsTypeToJsonSchema(unionType);
-    });
+    const res =
+      this.parentNode
+        .getFirstDescendant(
+          (child) =>
+            child.getType() === nodeType &&
+            child.getKind() === SyntaxKind.PropertySignature
+        )
+        ?.getFirstChildByKind(SyntaxKind.UnionType)
+        ?.forEachChildAsArray()
+        .map((unionNodeType) =>
+          this.tsTypeToJsonSchema(unionNodeType.getType())
+        ) ||
+      nodeType
+        .getUnionTypes()
+        .map((unionType) => this.tsTypeToJsonSchema(unionType));
 
     const [enumTypes, otherTypes] = _.partition(res, (type) => {
       return 'enum' in type && type.enum && type.enum.length !== 0;
@@ -571,20 +583,10 @@ export class TsToOpenApiTypeParser {
   }
 }
 
-// export const getTypeNameWithArguments = (
-//   typeName: string,
-//   typeArguments: Type<ts.Type>[]
-// ) => {
-//   return `${typeName}<${typeArguments.map(
-//     (typeArgument) =>
-//       typeArgument.getAliasSymbol()?.getName() ||
-//       typeArgument.getSymbol()?.getName() ||
-//       typeArgument.getLiteralValue() ||
-//       typeArgument.getText()
-//   )}>`;
-// };
-
-export const getTypeName = (nodeType: Type<ts.Type>) => {
+export const getTypeName = (
+  nodeType: Type<ts.Type>,
+  parentNode: Node<ts.Node>
+) => {
   return nodeType.isInterface()
     ? nodeType.getTypeArguments().length === 0
       ? nodeType.getSymbol()!.getName()
@@ -593,6 +595,26 @@ export const getTypeName = (nodeType: Type<ts.Type>) => {
     ? nodeType.getAliasTypeArguments()?.length === 0
       ? nodeType.getAliasSymbol()!.getName()
       : undefined
+    : nodeType.isNullable() === false
+    ? parentNode
+        .getFirstDescendant(
+          (child) =>
+            child.getKind() === SyntaxKind.PropertySignature &&
+            child.getType() === nodeType
+        )
+        ?.getFirstChildByKind(SyntaxKind.TypeReference)
+        ?.getTypeName()
+        .getText() ||
+      parentNode
+        .getFirstDescendant(
+          (child) =>
+            child.getKind() === SyntaxKind.TypeReference &&
+            child.getType() === nodeType
+        )
+        ?.asKind(SyntaxKind.TypeReference)
+        ?.getTypeName()
+        .getText() ||
+      undefined
     : undefined;
 };
 
@@ -623,17 +645,6 @@ export const tsTypeToJsonSchema = (args: TsTypeToJsonSchemaArgs) => {
     node: node,
     noTopRef: args.noTopRef,
   }).jsonSchema();
-
-  // console.log(
-  //   JSON.stringify(
-  //     new TsToOpenApiTypeParser({
-  //       node: node,
-  //       noTopRef: true,
-  //     }).openApiSchema(),
-  //     null,
-  //     2
-  //   )
-  // );
 
   return JSON.stringify(jsonSchema, null, 2);
 };
