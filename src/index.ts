@@ -178,9 +178,7 @@ const createDirs = (filePath: string) => {
 };
 
 const writeFileIfDifferent = (file: string, data: string) => {
-  const fileContent = readFileSync(file);
-
-  if (data !== fileContent.toString('utf-8')) {
+  if (!existsSync(file) || data !== readFileSync(file).toString('utf-8')) {
     writeFileSync(file, data);
     return true;
   }
