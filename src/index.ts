@@ -1,3 +1,6 @@
+import { createExpressRoute, registerRoute, ValidationError } from './server';
+export { createExpressRoute, registerRoute, ValidationError };
+
 import _ from 'lodash';
 import { OpenAPIV3 } from 'openapi-types';
 import path from 'path';
@@ -14,8 +17,6 @@ import { generateOpenApiDocument } from './generators/openapi';
 import { generateRoutes } from './generators/routes';
 import { checkProgramForErrors, getRoutes } from './find_routes';
 import configJsonSchema from './config_json_schema.json';
-import { createExpressRoute, registerRoute, ValidationError } from './server';
-export { createExpressRoute, registerRoute, ValidationError };
 
 export class RouteValidationError extends Error {
   constructor(message?: string) {
