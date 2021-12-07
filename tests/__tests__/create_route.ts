@@ -1,5 +1,5 @@
 import { Project, SyntaxKind } from 'ts-morph';
-import { createExpressRoute } from 'typescript-routes-to-openapi';
+import { createExpressRoute } from 'typescript-routes-to-openapi/server';
 import { getSchemaFromCreateRoute } from 'typescript-routes-to-openapi/src/find_routes';
 import { InvalidParamsType, RouteValidationError } from 'typescript-routes-to-openapi/src/index';
 

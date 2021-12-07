@@ -4,9 +4,9 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
-    "outDir": "build",
+    "skipLibCheck": true,    
     "declaration": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": ["server"]
 }

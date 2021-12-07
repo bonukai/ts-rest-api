@@ -1,6 +1,3 @@
-import { createExpressRoute, registerRoute, ValidationError } from './server';
-export { createExpressRoute, registerRoute, ValidationError };
-
 import _ from 'lodash';
 import { OpenAPIV3 } from 'openapi-types';
 import path from 'path';

@@ -4,7 +4,7 @@ import { OpenAPIV3 } from 'openapi-types';
 import {
   createExpressRoute,
   registerRoute,
-} from 'typescript-routes-to-openapi';
+} from 'typescript-routes-to-openapi/server';
 import { generateOpenApiDocument } from 'typescript-routes-to-openapi/src/generators/openapi';
 import { Route } from 'typescript-routes-to-openapi/src/route';
 import { getRoutesFromTsFile } from 'typescript-routes-to-openapi/src/find_routes';

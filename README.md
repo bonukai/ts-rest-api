@@ -5,8 +5,8 @@ Generate [OpenApi](https://swagger.io/specification/) document and input validat
 ## Installation
 
 ```
-npm install typescript-routes-to-openapi
-npm install --save-dev path-to-regexp ts-morph
+npm install --save-dev typescript-routes-to-openapi
+npm install ajv
 ```
 
 ## Usage
@@ -52,7 +52,7 @@ npm install --save-dev path-to-regexp ts-morph
 ### Create controller
 
 ```TypeScript
-import { createExpressRoute } from 'typescript-routes-to-openapi';
+import { createExpressRoute } from 'typescript-routes-to-openapi/server';
 
 type NewPet = {
   name: string;

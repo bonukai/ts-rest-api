@@ -54,37 +54,19 @@ type PropertyTypeOrDefault<
   ? Result
   : Default;
 
-const methods = [
-  'get',
-  'put',
-  'post',
-  'delete',
-  'options',
-  'head',
-  'patch',
-  'trace',
-] as const;
+type ExpressMethod =
+  | 'get'
+  | 'put'
+  | 'post'
+  | 'delete'
+  | 'options'
+  | 'head'
+  | 'patch'
+  | 'trace';
 
-type ExpressMethod = typeof methods[number];
 type RequestQueryType = Record<
   string,
   PathParamType | Array<PathParamType> | undefined
->;
-
-type Params = {
-  method: ExpressMethod;
-  path: string;
-  pathParams?: Record<string, PathParamType>;
-  requestQuery?: RequestQueryType;
-  requestBody?: any;
-  responseBody?: any;
-};
-
-type RequestHandlerType<T extends Params> = RequestHandler<
-  PropertyTypeOrDefault<T, 'pathParams', Record<string, string>>,
-  PropertyTypeOrDefault<T, 'responseBody', any>,
-  PropertyTypeOrDefault<T, 'requestBody', any>,
-  PropertyTypeOrDefault<T, 'requestQuery', any>
 >;
 
 export const createExpressRoute = <

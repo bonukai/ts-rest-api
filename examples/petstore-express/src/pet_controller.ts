@@ -1,4 +1,4 @@
-import { createExpressRoute } from 'typescript-routes-to-openapi';
+import { createExpressRoute } from 'typescript-routes-to-openapi/server';
 
 type NewPet = {
   name: string;
