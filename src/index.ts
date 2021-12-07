@@ -56,7 +56,7 @@ export type ConfigType = {
 const defaultConfig: Omit<ConfigType, 'openapi'> = {
   tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),
   generateOpenApiSchema: true,
-  checkProgramForErrors: true,
+  checkProgramForErrors: false,
   schemaOutputDir: process.cwd(),
   schemaOutputFileName: 'openapi.json',
   routesOutputDir: path.join(process.cwd(), 'generated'),
