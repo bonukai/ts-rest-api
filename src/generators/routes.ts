@@ -153,7 +153,9 @@ export const generateRoutesCalls = (routes: Route[]) => {
         ]
           .filter(Boolean)
           .join(',')}
-      }), ${classInstanceName(route.className!)}.${route.methodName});`
+      }), asyncWrapper(${classInstanceName(route.className!)}.${
+          route.methodName
+        }));`
     )
     .join('\n');
 };
@@ -227,6 +229,12 @@ export const generateRoutes = (routes: Route[], outputDirectory: string) => {
       } else {
         next();
       }
+    };
+  };
+
+  const asyncWrapper = (asyncHandler: RequestHandler): RequestHandler => {
+    return (req, res, next) => {
+      return Promise.resolve(asyncHandler(req, res, next)).catch(next);
     };
   };
   
