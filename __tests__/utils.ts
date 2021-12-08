@@ -1,4 +1,4 @@
-import { getPathParams, filterNonValidAndEmptyProperties } from 'typescript-routes-to-openapi/src/utils';
+import { getPathParams, filterNonValidAndEmptyProperties } from '../src/utils';
 
 describe('utils', () => {
   test('filterNonValidAndEmptyProperties', () => {

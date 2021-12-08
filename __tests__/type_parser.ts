@@ -3,7 +3,7 @@ import { Project } from 'ts-morph';
 import {
   isReferenceObject,
   TsToOpenApiTypeParser,
-} from 'typescript-routes-to-openapi/src/type_parser';
+} from '../src/type_parser';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);

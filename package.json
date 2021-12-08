@@ -12,11 +12,11 @@
     "url": "https://github.com/bonukai/typescript-routes-to-openapi"
   },
   "scripts": {
-    "test": "npm run test --prefix tests",
+    "test": "jest",
     "prebuild": "ts-node ./src/generate_config_json_schema.ts",
     "prepublish": "npm run build",
     "build": "tsc",
-    "postbuild": "tsc -p tsconfig.server.json"
+    "postbuild": "npm run build --prefix server"
   },
   "keywords": [
     "express",
@@ -48,11 +48,10 @@
     "@types/node": "^16.11.9",
     "@types/prettier": "^2.4.2",
     "jest": "^27.3.1",
-    "ts-jest": "^27.0.7"
+    "ts-jest": "^27.0.7",
+    "typescript-routes-to-openapi-server": "file:server"
   },
   "files": [
-    "build",
-    "server/index.js",
-    "server/index.d.ts"
+    "build"
   ]
 }

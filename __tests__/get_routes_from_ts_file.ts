@@ -4,10 +4,10 @@ import { OpenAPIV3 } from 'openapi-types';
 import {
   createExpressRoute,
   registerRoute,
-} from 'typescript-routes-to-openapi/server';
-import { generateOpenApiDocument } from 'typescript-routes-to-openapi/src/generators/openapi';
-import { Route } from 'typescript-routes-to-openapi/src/route';
-import { getRoutesFromTsFile } from 'typescript-routes-to-openapi/src/find_routes';
+} from 'typescript-routes-to-openapi-server';
+import { generateOpenApiDocument } from '../src/generators/openapi';
+import { Route } from '../src/route';
+import { getRoutesFromTsFile } from '../src/find_routes';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);

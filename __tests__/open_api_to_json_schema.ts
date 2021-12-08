@@ -1,4 +1,4 @@
-import { openApiToJsonSchema } from 'typescript-routes-to-openapi/src/type_parser';
+import { openApiToJsonSchema } from '../src/type_parser';
 
 describe('openApiToJsonSchema', () => {
   test('nullable', () => {

@@ -1,4 +1,4 @@
-import { splitMultiTypeEnum } from 'typescript-routes-to-openapi/src/generators/routes';
+import { splitMultiTypeEnum } from '../src/generators/routes';
 
 describe('splitMultiTypeEnum', () => {
   test('simple', () => {

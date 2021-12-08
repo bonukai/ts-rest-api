@@ -1,7 +1,7 @@
 import { Project, SyntaxKind } from 'ts-morph';
-import { createExpressRoute } from 'typescript-routes-to-openapi/server';
-import { getSchemaFromCreateRoute } from 'typescript-routes-to-openapi/src/find_routes';
-import { InvalidParamsType, RouteValidationError } from 'typescript-routes-to-openapi/src/index';
+import { createExpressRoute } from 'typescript-routes-to-openapi-server';
+import { getSchemaFromCreateRoute } from '../src/find_routes';
+import { InvalidParamsType, RouteValidationError } from '../src/index';
 
 const project = new Project({ compilerOptions: { strict: true } });
 const sourceFile = project.addSourceFileAtPath(__filename);

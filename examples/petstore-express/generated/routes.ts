@@ -2,7 +2,7 @@
 
 import express, { RequestHandler, Router } from 'express';
 import Ajv from 'ajv';
-import { ValidationError } from 'typescript-routes-to-openapi/server';
+import { ValidationError } from 'typescript-routes-to-openapi-server';
 
 const ajv = new Ajv({
   allErrors: true,

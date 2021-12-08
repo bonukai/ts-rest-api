@@ -328,7 +328,7 @@ export const getRoutesFromTsFile = (sourceFile: SourceFile): Route[] => {
       if (
         isImportedFromModule(
           callExpression,
-          'typescript-routes-to-openapi/server',
+          'typescript-routes-to-openapi-server',
           'createExpressRoute'
         )
       ) {
@@ -336,7 +336,7 @@ export const getRoutesFromTsFile = (sourceFile: SourceFile): Route[] => {
       } else if (
         isImportedFromModule(
           callExpression,
-          'typescript-routes-to-openapi/server',
+          'typescript-routes-to-openapi-server',
           'registerRoute'
         )
       ) {
