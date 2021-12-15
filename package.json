@@ -1,5 +1,5 @@
 {
-  "name": "typescript-routes-to-openapi-generator",
+  "name": "typescript-routes-to-openapi",
   "version": "0.0.20",
   "description": "Generate OpenApi document and input validators with Ajv for express server from TypeScript project",
   "private": false,
