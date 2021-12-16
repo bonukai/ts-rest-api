@@ -8,11 +8,10 @@
     "build": "tsc"
   },
   "dependencies": {
-    "ajv": "^8.8.2",
-    "express": "^4.17.1"    
+    "express": "^4.17.1",
+    "typescript-routes-to-openapi-server": "^0.0.1"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.1",
-    "typescript-routes-to-openapi": "^0.0.18"
+    "@tsconfig/recommended": "^1.0.1"
   }
 }
