@@ -182,9 +182,9 @@ export const generateRoutes = (routes: Route[], outputDirectory: string) => {
   });
   
   const validatorHandler = (args: {
-    pathParamsSchema?: any;
-    requestQuerySchema?: any;
-    requestBodySchema?: any;
+    pathParamsSchema?: unknown;
+    requestQuerySchema?: unknown;
+    requestBodySchema?: unknown;
   }): RequestHandler => {
     const { pathParamsSchema, requestQuerySchema, requestBodySchema } = args;
   
