@@ -122,22 +122,22 @@ T extends {
   responseBody?: any;
 }
 >(
-arg: unknown
-): unknown {
-  if (Array.isArray(arg)) {
-    return (arg as RequestHandler[]).reduce((result, middleware) => {
+...arg: RequestHandler[]
+): RequestHandler {
+  if (arg.length > 1) {
+    return arg.reduce((previousMiddleware, currentMiddleware) => {
       return (req, res, next) => {
-        result(req, res, (err) => {
+        previousMiddleware(req, res, (err) => {
           if (err) {
             return next(err);
           }
-          middleware(req, res, next);
+          currentMiddleware(req, res, next);
         });
       };
     });
   }
 
-  return arg;
+  return arg[0];
 }
 
 export const registerRoute = <
