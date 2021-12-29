@@ -108,7 +108,7 @@ T extends {
   PropertyTypeOrDefault<T, 'requestBody', any>,
   PropertyTypeOrDefault<T, 'requestQuery', any>
 >[]
-): RequestHandler[];
+): RequestHandler;
 
 export function createExpressRoute<
 T extends {
@@ -122,11 +122,22 @@ T extends {
   responseBody?: any;
 }
 >(
-arg: any
-): any {
-  {
-    return arg;
-  };
+arg: unknown
+): unknown {
+  if (Array.isArray(arg)) {
+    return (arg as RequestHandler[]).reduce((result, middleware) => {
+      return (req, res, next) => {
+        result(req, res, (err) => {
+          if (err) {
+            return next(err);
+          }
+          middleware(req, res, next);
+        });
+      };
+    });
+  }
+
+  return arg;
 }
 
 export const registerRoute = <

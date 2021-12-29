@@ -232,21 +232,11 @@ export const generateRoutes = (routes: Route[], outputDirectory: string) => {
     };
   };
 
-  const _asyncWrapper = (asyncHandler: RequestHandler): RequestHandler => {
+  const asyncWrapper = (asyncHandler: RequestHandler): RequestHandler => {
     return (req, res, next) => {
       return Promise.resolve(asyncHandler(req, res, next)).catch(next);
     };
   };
-  
-  function asyncWrapper(asyncHandler: RequestHandler): RequestHandler;
-  function asyncWrapper(handlers: RequestHandler[]): RequestHandler[];
-  function asyncWrapper(args: unknown): unknown {
-    if (Array.isArray(args)) {
-      return args.map(_asyncWrapper);
-    }
-  
-    return _asyncWrapper(args as RequestHandler);
-  }
   
   ${generateClassImports(schemasWithUniqueClass, outputDirectory)}
   
