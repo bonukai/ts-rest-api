@@ -69,27 +69,65 @@ type RequestQueryType = Record<
   PathParamType | Array<PathParamType> | undefined
 >;
 
-export const createExpressRoute = <
-  T extends {
-    method: ExpressMethod;
-    path: string;
-    pathParams?: PathParams<
-      PropertyTypeOrDefault<T, 'path', Record<string, PathParamType>>
-    >;
-    requestQuery?: RequestQueryType;
-    requestBody?: any;
-    responseBody?: any;
-  }
+
+export function createExpressRoute<
+T extends {
+  method: ExpressMethod;
+  path: string;
+  pathParams?: PathParams<
+    PropertyTypeOrDefault<T, 'path', Record<string, PathParamType>>
+  >;
+  requestQuery?: RequestQueryType;
+  requestBody?: any;
+  responseBody?: any;
+}
 >(
-  handler: RequestHandler<
-    PropertyTypeOrDefault<T, 'pathParams', Record<string, string>>,
-    PropertyTypeOrDefault<T, 'responseBody', any>,
-    PropertyTypeOrDefault<T, 'requestBody', any>,
-    PropertyTypeOrDefault<T, 'requestQuery', any>
-  >
-): RequestHandler => {
-  return handler as any;
-};
+handler: RequestHandler<
+  PropertyTypeOrDefault<T, 'pathParams', Record<string, string>>,
+  PropertyTypeOrDefault<T, 'responseBody', any>,
+  PropertyTypeOrDefault<T, 'requestBody', any>,
+  PropertyTypeOrDefault<T, 'requestQuery', any>
+>
+): RequestHandler;
+
+export function createExpressRoute<
+T extends {
+  method: ExpressMethod;
+  path: string;
+  pathParams?: PathParams<
+    PropertyTypeOrDefault<T, 'path', Record<string, PathParamType>>
+  >;
+  requestQuery?: RequestQueryType;
+  requestBody?: any;
+  responseBody?: any;
+}
+>(
+...handlers: RequestHandler<
+  PropertyTypeOrDefault<T, 'pathParams', Record<string, string>>,
+  PropertyTypeOrDefault<T, 'responseBody', any>,
+  PropertyTypeOrDefault<T, 'requestBody', any>,
+  PropertyTypeOrDefault<T, 'requestQuery', any>
+>[]
+): RequestHandler[];
+
+export function createExpressRoute<
+T extends {
+  method: ExpressMethod;
+  path: string;
+  pathParams?: PathParams<
+    PropertyTypeOrDefault<T, 'path', Record<string, PathParamType>>
+  >;
+  requestQuery?: RequestQueryType;
+  requestBody?: any;
+  responseBody?: any;
+}
+>(
+arg: any
+): any {
+  {
+    return arg;
+  };
+}
 
 export const registerRoute = <
   T extends {
