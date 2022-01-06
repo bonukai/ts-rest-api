@@ -127,17 +127,19 @@ T extends {
   if (arg.length > 1) {
     return arg.reduce((previousMiddleware, currentMiddleware) => {
       return (req, res, next) => {
-        previousMiddleware(req, res, (err) => {
+        Promise.resolve(previousMiddleware(req, res, (err) => {
           if (err) {
             return next(err);
           }
-          currentMiddleware(req, res, next);
-        });
+          Promise.resolve(currentMiddleware(req, res, next)).catch(next);
+        })).catch(next);
       };
     });
   }
 
-  return arg[0];
+  return (req, res, next) => {
+    return Promise.resolve(arg[0](req, res, next)).catch(next);
+  };
 }
 
 export const registerRoute = <
