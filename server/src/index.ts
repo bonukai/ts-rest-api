@@ -169,5 +169,7 @@ export class ValidationError extends Error {
     this.statusCode = 400;
     this.message = errorMessage;
     this.errors = errors;
+
+    Object.setPrototypeOf(this, new.target.prototype);
   }
 }
