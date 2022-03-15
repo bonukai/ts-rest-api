@@ -1,6 +1,6 @@
 # typescript-routes-to-openapi &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/bonukai/typescript-routes-to-openapi/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/typescript-routes-to-openapi.svg?style=flat)](https://www.npmjs.com/package/typescript-routes-to-openapi)
 
-Generate [OpenApi](https://swagger.io/specification/) document and input validators with [Ajv](ajv.js.org/) for [express](https://expressjs.com/) server from [TypeScript](https://www.typescriptlang.org/) project.
+Generate [OpenApi](https://swagger.io/specification/) documentation and input validators with [Ajv](ajv.js.org/) for [express](https://expressjs.com/) server from [TypeScript](https://www.typescriptlang.org/) project.
 
 ## Installation
 
