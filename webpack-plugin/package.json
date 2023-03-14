@@ -24,7 +24,7 @@
   "devDependencies": {
     "typescript": "^4.5.2",
     "typescript-routes-to-openapi": "file:..",
-    "webpack": "^5.64.4"
+    "webpack": "^5.76.0"
   },
   "files": [
     "build"
